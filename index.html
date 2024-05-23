@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Панель для ключей</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+background-color: #f0f0f0;
+margin: 0;
+}
+#loginForm, #keyPanel {
+display: none;
+flex-direction: column;
+align-items: center;
+padding: 20px;
+background-color: #fff;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+border-radius: 5px;
+}
+#loginForm.active, #keyPanel.active {
+display: flex;
+}
+input {
+margin-bottom: 10px;
+padding: 8px;
+border: 1px solid #ccc;
+border-radius: 4px;
+width: 100%;
+}
+button {
+padding: 10px 20px;
+border: none;
+border-radius: 4px;
+background-color: #007bff;
+color: #fff;
+cursor: pointer;
+}
+button:hover {
+background-color: #0056b3;
+}
+#generatedKey {
+margin-top: 20px;
+font-size: 1.2em;
+font-family: monospace;
+color: #333;
+}
+</style>
+</head>
+<body>
+
+<div id="loginForm" class="active">
+<h2>Авторизация</h2>
+<input type="text" id="username" placeholder="Имя" required>
+<input type="password" id="password" placeholder="Пароль" required>
+<button onclick="login()">Войти</button>
+</div>
+
+<div id="keyPanel">
+<h2>Панель ключей</h2>
+<button onclick="generateKey()">Сгенерировать ключ</button>
+<div id="generatedKey"></div>
+</div>
+
+<script>
+const correctUsername = "Teke_Love";
+const correctPassword = "Romagei";
+
+function login() {
+const username = document.getElementById('username').value;
+const password = document.getElementById('password').value;
+
+if (username === correctUsername && password === correctPassword) {
+document.getElementById('loginForm').classList.remove('active');
+document.getElementById('keyPanel').classList.add('active');
+} else {
+alert('Неверное имя или пароль');
+}
+}
+
+function generateKey() {
+const key = generateRandomKey();
+document.getElementById('generatedKey').innerText = key;
+}
+
+function generateRandomKey() {
+const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+let key = '';
+for (let i = 0; i < 32; i++) {
+key += chars.charAt(Math.floor(Math.random() * chars.length));
+}
+return key;
+}
+</script>
+</body>
+</html>
+
+
+
